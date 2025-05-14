@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router";
+import { Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Home from "./pages/HomePage";
+import Login from "./pages/LoginPage";
+import { getCurrentUser } from "./services/authService";
+import Signup from "./pages/Signup"
+import Profile from "./pages/Profile";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const PrivateRoute = ({ children }) => {
+    return getCurrentUser() ? children : <Navigate to="/signin" />;
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Toaster />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/profile" element={<Profile/>}/>
+
+        {/* prevent user after login */}
+        <Route path="*" element={<Navigate to="/signin" />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
