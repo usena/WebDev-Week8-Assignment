@@ -1,17 +1,12 @@
 import { Routes, Route } from "react-router";
 import { Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Home from "./pages/HomePage";
-import Login from "./pages/LoginPage";
-import { getCurrentUser } from "./services/authService";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Signup from "./pages/Signup"
 import Profile from "./pages/Profile";
 
 function App() {
-  const PrivateRoute = ({ children }) => {
-    return getCurrentUser() ? children : <Navigate to="/signin" />;
-  };
-
   return (
     <>
       <Toaster />
@@ -19,9 +14,7 @@ function App() {
         <Route
           path="/"
           element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
+            <Home />
           }
         />
         

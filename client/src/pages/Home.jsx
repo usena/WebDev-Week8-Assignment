@@ -1,7 +1,7 @@
 import React from "react";
-import NavbarComponent from "../components/NavbarComponent";
-import AddTaskComponent from "../components/AddTaskComponent";
-import MyTaskComponent from "../components/MyTaskComponent";
+import NavbarComponent from "../components/NavBar";
+import AddTaskComponent from "../components/AddTask";
+import MyTaskComponent from "../components/MyTask";
 
 const Home = () => {
     return (

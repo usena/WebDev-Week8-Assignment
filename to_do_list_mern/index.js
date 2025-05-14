@@ -20,6 +20,8 @@ app.use(cookieParser()); // Enable cookie parsing
 const PORT = process.env.PORT
 connectDB();
 
+const allowedOrigins = ['']
+
 app.get('/', (req, res) => res.send("API Working"));
 
 app.use("/service/todo", todoRoute)
